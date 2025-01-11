@@ -1,5 +1,7 @@
 package com.example.ecomKart.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -47,6 +49,17 @@ public class Item {
     @JsonManagedReference
     private List<ItemReviews> itemReviews;
 
+    @ManyToMany(mappedBy = "items")
+    @JsonIgnore
+    private List<Order> orders;
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public ItemDetails getItemDetails() {
         return itemDetails;
